@@ -26,12 +26,27 @@ const isPalindrome = function(x) {
     return true;
 };
 
-console.log('test 1:', isPalindrome(121) === true ? 'ok' : 'failed');
-console.log('test 2:', isPalindrome(-121) === false ? 'ok' : 'failed');
-console.log('test 3:', isPalindrome(10) === false ? 'ok' : 'failed');
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+const isPalindrome2 = function(x){
+    if (x < 0 || x % 10 === 0 && x !== 0) return false;
 
-console.log('test 4:', isPalindrome(1) === true ? 'ok' : 'failed');
-console.log('test 5:', isPalindrome(123454321) === true ? 'ok' : 'failed');
-console.log('test 6:', isPalindrome(3345433) === true ? 'ok' : 'failed');
+    let reversedHalf = 0;
+    while(x > reversedHalf) {
+        reversedHalf = reversedHalf * 10 + x % 10;
+        x = Math.trunc(x / 10);
+    }
 
+    return x === reversedHalf || x === Math.trunc(reversedHalf / 10);
+}
+
+console.log('test 1:', isPalindrome2(121) === true ? 'ok' : 'failed');
+console.log('test 2:', isPalindrome2(-121) === false ? 'ok' : 'failed');
+console.log('test 3:', isPalindrome2(10) === false ? 'ok' : 'failed');
+
+console.log('test 4:', isPalindrome2(1) === true ? 'ok' : 'failed');
+console.log('test 5:', isPalindrome2(123454321) === true ? 'ok' : 'failed');
+console.log('test 6:', isPalindrome2(3345433) === true ? 'ok' : 'failed');
 
