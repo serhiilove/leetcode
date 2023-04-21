@@ -131,18 +131,7 @@ class LinkedList {
     }
 }
 
-const ll = new LinkedList();
-
-ll.add(1);
-ll.add(2);
-ll.add(3);
-ll.add(4);
-ll.add(5);
-ll.printList();
-
-console.log(ll.removeElement(3));
-ll.printList();
-
+module.exports = LinkedList;
 
 
 
