@@ -1,4 +1,33 @@
-const LinkedList = require('../data_structures/single-linked-list');
+class Node {
+    constructor(val, next) {
+        this.val = val || 0;
+        this.next = next || null;
+    }
+}
+
+class LinkedList {
+    constructor() {
+        this.head = null;
+        this.size = 0;
+    }
+
+    add(val) {
+        const node = new Node(val);
+
+        if (this.head === null) {
+            this.head = node;
+        } else {
+            let curr = this.head;
+
+            while (curr.next) {
+                curr = curr.next
+            }
+
+            curr.next = node;
+        }
+        this.size++;
+    }
+}
 
 /**
  * Definition for singly-linked list.
@@ -39,10 +68,11 @@ const mergeTwoLists = function(list1, list2) {
     ll.add(Math.min(curr1.val, curr2.val));
     ll.add(Math.max(curr1.val, curr2.val));
 
-    return ll.printList();
+    return ll.head
 };
 
 const l1 = { val: 1, next: { val: 2, next: { val: 4, next: null }}}; // 1 -> 2 -> 4
 const l2 = { val: 1, next: { val: 3, next: { val: 4, next: null }}}; // 1 -> 3 => 4
 
 console.log(mergeTwoLists(l1, l2));
+
