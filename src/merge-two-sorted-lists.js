@@ -1,31 +1,7 @@
 class Node {
     constructor(val, next) {
-        this.val = val || 0;
-        this.next = next || null;
-    }
-}
-
-class LinkedList {
-    constructor() {
-        this.head = null;
-        this.size = 0;
-    }
-
-    add(val) {
-        const node = new Node(val);
-
-        if (this.head === null) {
-            this.head = node;
-        } else {
-            let curr = this.head;
-
-            while (curr.next) {
-                curr = curr.next
-            }
-
-            curr.next = node;
-        }
-        this.size++;
+        this.val = val===undefined ? 0 : val;
+        this.next = next===undefined ? null : next;
     }
 }
 
@@ -41,38 +17,78 @@ class LinkedList {
  * @param {ListNode} list2
  * @return {ListNode}
  */
-const mergeTwoLists = function(list1, list2) {
-    const ll = new LinkedList();
+var mergeTwoLists = function(list1, list2) {
+    if (list1 === null && list2 === null) {
+        return list1;
+    }
 
-    let curr1 = list1;
-    let curr2 = list2;
+    let mergedList = new Node(null);
 
-    while (curr1.next || curr2.next) {
-        if (curr1.next && !curr2.next) {
-            ll.add(curr1.val);
-            curr1 = curr1.next;
-        } else if (!curr1.next && curr2.next) {
-            ll.add(curr2.val);
-            curr2 = curr2.next;
+    let p1 = list1;
+    let p2 = list2;
+
+    const addToMergedList = (val) => {
+        const newNode = new Node(val);
+
+        if (!mergedList.val) {
+            mergedList = newNode;
         } else {
-            if (curr1.val <= curr2.val) {
-                ll.add(curr1.val);
-                curr1 = curr1.next;
-            } else {
-                ll.add(curr2.val);
-                curr2 = curr2.next;
+            let current = mergedList;
+            while (current.next) {
+                current = current.next;
             }
+            current.next = newNode;
         }
     }
 
-    ll.add(Math.min(curr1.val, curr2.val));
-    ll.add(Math.max(curr1.val, curr2.val));
+    while (p1 || p2) {
+        if (p1 && p2) {
+            if (p1.val <= p2.val) {
+                addToMergedList(p1.val);
+                p1 = p1.next;
+            } else {
+                addToMergedList(p2.val);
+                p2 = p2.next;
+            }
+        } else if (p1 && !p2) {
+            addToMergedList(p1.val);
+            p1 = p1.next;
+        } else {
+            addToMergedList(p2.val);
+            p2 = p2.next;
+        }
+    }
 
-    return ll.head
+    return mergedList;
 };
 
-const l1 = { val: 1, next: { val: 2, next: { val: 4, next: null }}}; // 1 -> 2 -> 4
-const l2 = { val: 1, next: { val: 3, next: { val: 4, next: null }}}; // 1 -> 3 => 4
 
-console.log(mergeTwoLists(l1, l2));
+// test 1
+const l1 = { val: 1, next: { val: 2, next: { val: 4, next: null } } };
+const l2 = { val: 1, next: { val: 3, next: { val: 4, next: null } } };
 
+// test 2
+// const l1 = { val: null, next: null };
+// const l2 = { val: null, next: null };
+
+// test 3
+// const l1 = { val: null, next: null };
+// const l2 = { val: 0, next: null };
+
+function printList (ml) {
+    let list = ''
+
+    let curr = ml;
+
+    while(curr.next) {
+        list = list + curr.val + ' -> ';
+        curr = curr.next;
+    }
+
+    list = list + curr.val;
+    console.log('List: ', list);
+
+}
+
+const result = mergeTwoLists(l1, l2);
+printList(result)
