@@ -17,50 +17,50 @@ class Node {
  * @param {ListNode} list2
  * @return {ListNode}
  */
-var mergeTwoLists = function(list1, list2) {
-    if (list1 === null && list2 === null) {
-        return list1;
-    }
-
-    let mergedList = new Node(null);
-
-    let p1 = list1;
-    let p2 = list2;
-
-    const addToMergedList = (val) => {
-        const newNode = new Node(val);
-
-        if (!mergedList.val) {
-            mergedList = newNode;
-        } else {
-            let current = mergedList;
-            while (current.next) {
-                current = current.next;
-            }
-            current.next = newNode;
-        }
-    }
-
-    while (p1 || p2) {
-        if (p1 && p2) {
-            if (p1.val <= p2.val) {
-                addToMergedList(p1.val);
-                p1 = p1.next;
-            } else {
-                addToMergedList(p2.val);
-                p2 = p2.next;
-            }
-        } else if (p1 && !p2) {
-            addToMergedList(p1.val);
-            p1 = p1.next;
-        } else {
-            addToMergedList(p2.val);
-            p2 = p2.next;
-        }
-    }
-
-    return mergedList;
-};
+// var mergeTwoLists = function(list1, list2) {
+//     if (list1 === null && list2 === null) {
+//         return list1;
+//     }
+//
+//     let mergedList = new Node(null);
+//
+//     let p1 = list1;
+//     let p2 = list2;
+//
+//     const addToMergedList = (val) => {
+//         const newNode = new Node(val);
+//
+//         if (!mergedList.val) {
+//             mergedList = newNode;
+//         } else {
+//             let current = mergedList;
+//             while (current.next) {
+//                 current = current.next;
+//             }
+//             current.next = newNode;
+//         }
+//     }
+//
+//     while (p1 || p2) {
+//         if (p1 && p2) {
+//             if (p1.val <= p2.val) {
+//                 addToMergedList(p1.val);
+//                 p1 = p1.next;
+//             } else {
+//                 addToMergedList(p2.val);
+//                 p2 = p2.next;
+//             }
+//         } else if (p1 && !p2) {
+//             addToMergedList(p1.val);
+//             p1 = p1.next;
+//         } else {
+//             addToMergedList(p2.val);
+//             p2 = p2.next;
+//         }
+//     }
+//
+//     return mergedList;
+// };
 
 
 // test 1
